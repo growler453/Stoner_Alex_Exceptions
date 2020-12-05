@@ -21,10 +21,10 @@ int main() {
 
 		end = character(start, offset);
 		if (end != 0) {
-			cout << end << endl << endl;
+			cout << "Final result: " << end << endl << endl;
 		}
 
-		cout << "Continue? Y/N";
+		cout << "Again? Y/N";
 		cin >> driver;
 		cout << endl;
 	} while (driver == 'Y' || driver == 'y');
@@ -36,10 +36,21 @@ char character(char start, int offset) {
 	char temp = start + offset;
 
 	try {
-
+		if (!isalpha(start)) {
+			throw string("invalidCharacterException");
+		} 
+		else if (!isalpha(temp)) {
+			throw string("invalidRangeException");
+		}
+		else if (islower(start) && isupper(temp) || islower(temp) && isupper(start)) {
+			throw string("caseTransitionException");
+		}
+		else {
+			return temp;
+		}
 	}
 	catch (string s){
-		cout << s << endl;
+		cout << s << endl << endl;
 		return 0;
 	}
 }
